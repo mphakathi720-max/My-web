@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a2218" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Ibanesizathusokuphila" />
+  <link rel="manifest" href="manifest.json" />
+  <title>Ibanesizathusokuphila | Ubuntu Luxurious Goods &amp; Imvelo Pharmaceutical</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = { theme: { extend: { colors: { forest: { 950: '#0a2218', 900: '#143d2b', 800: '#1b5039', 100: '#e8f3ee', 50: '#f4f9f6' }, gold: { 500: '#c59b27', 400: '#d8b44c', 100: '#fbf5e4' } }, fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] } } } };
+  </script>
+  <style>
+    body { font-family: Inter, sans-serif; background: #f8faf9; }
+    .font-display { font-family: 'Playfair Display', serif; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body class="min-h-screen text-slate-800">
+  <div class="bg-forest-950 px-4 py-2 text-center text-xs font-medium tracking-wide text-white sm:text-sm"><span id="announcement-text">Direct Retail Distributor: Ubuntu Luxurious Goods &amp; Imvelo Pharmaceutical (Trillion Cart Investments) • WhatsApp Orders: 0785335134</span></div>
+  <header class="sticky top-0 z-30 border-b border-slate-200 bg-white/95 shadow-sm backdrop-blur">
+    <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6">
+      <a href="#top" class="flex items-center gap-3">
+        <span class="flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl border border-gold-500/40 bg-forest-900 text-xl text-gold-400"><img id="company-logo" hidden alt="Company logo" class="h-full w-full object-contain" /><span id="company-logo-fallback">✦</span></span>
+        <span><strong id="company-name" class="font-display block text-lg leading-tight text-forest-900 sm:text-xl">Ibanesizathusokuphila</strong><span id="company-tagline" class="text-xs text-slate-500">Ubuntu Luxurious Goods &amp; Imvelo Pharmaceutical</span></span>
+      </a>
+      <nav class="flex items-center gap-2">
+        <button id="store-tab" class="rounded-lg bg-forest-900 px-3 py-2 text-xs font-semibold text-white" onclick="showView('store')">Customer Store</button>
+        <button id="admin-tab" class="rounded-lg px-3 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100" onclick="showView('admin')">Owner Admin</button>
+        <button id="cart-button" class="rounded-xl border border-gold-500/30 bg-gold-100 px-3 py-2 text-sm font-bold text-forest-900" onclick="toggleCart(true)">Basket <span id="cart-count" class="ml-1 rounded-full bg-forest-900 px-2 py-0.5 text-xs text-gold-400">0</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="store-view">
+    <section id="top" class="relative overflow-hidden bg-gradient-to-br from-forest-950 via-forest-900 to-forest-800 text-white">
+      <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20">
+        <span class="mb-4 inline-flex rounded-full border border-gold-400/40 bg-gold-500/15 px-3 py-1 text-xs font-semibold text-gold-400">Direct-to-Customer Retail Distributor <span class="mx-2">•</span> Trillion Cart Investments</span>
+        <h1 class="font-display max-w-3xl text-3xl font-bold leading-tight sm:text-5xl">Luxury Lifestyle &amp; Trusted Wellness Delivered Directly to You.</h1>
+        <p class="mt-4 max-w-2xl text-sm leading-relaxed text-slate-200 sm:text-base">Shop authentic <strong class="text-gold-400">Ubuntu Luxurious Goods</strong> and <strong class="text-gold-400">Imvelo Pharmaceutical</strong> wellness essentials directly from Ibanesizathusokuphila.</p>
+        <div class="mt-7 flex flex-wrap gap-3"><a href="#catalog" class="rounded-xl bg-gold-500 px-5 py-3 text-sm font-bold text-forest-950 hover:bg-gold-400">Browse Products</a><a id="hero-whatsapp" href="https://wa.me/27785335134" target="_blank" rel="noopener" class="rounded-xl border border-white/30 bg-white/10 px-5 py-3 text-sm font-semibold text-white hover:bg-white/20">WhatsApp: <span id="hero-phone">0785335134</span></a></div>
+      </div>
+    </section>
+
+    <section id="catalog" class="mx-auto max-w-7xl px-4 py-9 sm:px-6">
+      <div class="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-center">
+        <div id="category-filters" class="flex flex-wrap gap-2"></div>
+        <div class="flex flex-col gap-2 sm:flex-row">
+          <input id="search" type="search" placeholder="Search products..." oninput="renderProducts()" class="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-forest-800 sm:w-64" />
+          <select id="stock-filter" onchange="renderProducts()" class="rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm"><option value="all">All availability</option><option value="available">In stock only</option></select>
+        </div>
+      </div>
+      <div id="product-grid" class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
+      <p id="empty-products" hidden class="rounded-2xl border border-slate-200 bg-white p-10 text-center text-slate-500">No products match your search.</p>
+    </section>
+    <section id="promotion-section" hidden class="mx-auto max-w-7xl space-y-5 px-4 pb-8 sm:px-6"></section>
+    <section id="supplier-section" hidden class="mx-auto max-w-7xl px-4 py-7 sm:px-6">
+      <h2 class="mb-4 text-center font-display text-xl font-bold text-forest-900">Our Suppliers</h2>
+      <div id="supplier-logos" class="flex flex-wrap items-center justify-center gap-8"></div>
+    </section>
+    <footer class="mt-10 bg-forest-950 text-slate-300">
+      <div class="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-3">
+        <div><h2 id="footer-business-name" class="font-display text-xl font-bold text-white">Ibanesizathusokuphila</h2><p class="mt-2 text-sm leading-relaxed text-slate-400">Authorized direct-to-customer retail distributor for Ubuntu Luxurious Goods and Imvelo Pharmaceutical under Trillion Cart Investments.</p></div>
+        <div><h3 class="text-sm font-bold uppercase tracking-wider text-gold-400">Product Lines</h3><p class="mt-3 text-sm">Ubuntu Luxurious Goods<br>Imvelo Pharmaceutical<br>Direct retail customer orders</p></div>
+        <div><h3 class="text-sm font-bold uppercase tracking-wider text-gold-400">Customer Support</h3><p class="mt-3 text-sm">WhatsApp / Phone: <a id="footer-phone-link" class="font-semibold text-white hover:text-gold-400" href="https://wa.me/27785335134">0785335134</a><br>Email: <a id="business-email-link" class="font-semibold text-white hover:text-gold-400" href="mailto:ibanesizathusokuphila@gmail.com">ibanesizathusokuphila@gmail.com</a><br><span class="text-xs text-slate-400">All prices in South African Rand (ZAR / R).</span></p></div>
+      </div>
+    </footer>
+  </main>
+
+  <main id="admin-view" hidden class="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6">
+    <section id="admin-lock" class="mx-auto max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <h2 id="admin-lock-title" class="font-display text-2xl font-bold text-forest-900">Owner Admin Access</h2>
+      <p id="admin-lock-copy" class="mt-2 text-sm text-slate-600">Create a private passcode for this browser. You’ll need it each time you open the admin.</p>
+      <form onsubmit="unlockAdmin(event)" class="mt-5 space-y-3">
+        <label class="block text-sm font-semibold">Passcode<input id="admin-passcode" type="password" inputmode="numeric" minlength="6" required autocomplete="current-password" placeholder="At least 6 characters" class="mt-1 w-full rounded-xl border px-3 py-2.5" /></label>
+        <label id="admin-confirm-wrap" class="hidden block text-sm font-semibold">Confirm passcode<input id="admin-passcode-confirm" type="password" minlength="6" autocomplete="new-password" class="mt-1 w-full rounded-xl border px-3 py-2.5" /></label>
+        <button id="admin-unlock-button" class="w-full rounded-xl bg-forest-900 px-4 py-3 text-sm font-bold text-white">Unlock Admin</button>
+      </form>
+      <p id="admin-lock-note" class="mt-4 text-xs leading-relaxed text-slate-500">This browser-only passcode is a privacy barrier, not server-grade security. For stronger protection, use a server with account authentication.</p>
+      <p id="admin-auth-error" class="mt-3 text-sm font-semibold text-rose-700" role="alert"></p>
+    </section>
+    <div id="admin-content" hidden>
+    <div class="mb-6 flex flex-wrap items-center justify-between gap-4"><div><h2 class="font-display text-3xl font-bold text-forest-900">Store Management Console</h2><p class="mt-1 text-sm text-slate-500">Manage inventory, customer orders, and storefront content.</p><span class="mt-2 inline-flex items-center gap-2 rounded-full bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-800"><span class="h-2 w-2 rounded-full bg-amber-500"></span>Saved in this browser only</span></div><div class="flex gap-2"><button onclick="lockAdmin()" class="rounded-xl border px-4 py-3 text-sm font-semibold text-slate-700">Lock Admin</button><button onclick="openProductForm()" class="rounded-xl bg-forest-900 px-4 py-3 text-sm font-semibold text-white hover:bg-forest-800">+ Add New Stock</button></div></div>
+    <div class="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4"><div class="rounded-2xl border bg-white p-4"><p class="text-xs font-semibold uppercase text-slate-500">Products</p><strong id="kpi-products" class="mt-1 block text-2xl text-forest-900">0</strong></div><div class="rounded-2xl border bg-white p-4"><p class="text-xs font-semibold uppercase text-slate-500">Units in stock</p><strong id="kpi-units" class="mt-1 block text-2xl text-forest-900">0</strong></div><div class="rounded-2xl border bg-white p-4"><p class="text-xs font-semibold uppercase text-slate-500">Low / out of stock</p><strong id="kpi-low" class="mt-1 block text-2xl text-amber-700">0</strong></div><div class="rounded-2xl border bg-white p-4"><p class="text-xs font-semibold uppercase text-slate-500">Orders</p><strong id="kpi-orders" class="mt-1 block text-2xl text-forest-900">0</strong></div></div>
+    <section class="mb-8 rounded-2xl border border-slate-200 bg-white p-5 sm:p-6"><div class="mb-4 flex flex-wrap items-center justify-between gap-2"><div><h3 class="font-display text-xl font-bold text-forest-900">Recent Store Activity</h3><p class="mt-1 text-sm text-slate-500">A local audit trail of recent changes made on this device.</p></div><button type="button" onclick="clearActivityLog()" class="rounded-lg border px-3 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-50">Clear activity</button></div><div id="admin-activity" class="space-y-2"></div></section>
+    <section class="mb-8"><div class="mb-3 flex flex-wrap items-center justify-between gap-3"><h3 class="font-display text-xl font-bold text-forest-900">Inventory</h3><input id="admin-product-search" type="search" oninput="renderAdmin()" placeholder="Search inventory..." class="rounded-xl border border-slate-200 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-forest-800" /></div><div id="admin-products" class="grid gap-4 md:grid-cols-2 lg:grid-cols-3"></div></section>
+    <section class="mt-8 rounded-2xl border border-slate-200 bg-white p-5 sm:p-6">
+      <h3 class="font-display text-xl font-bold text-forest-900">Advertisements &amp; Supplier Logos</h3>
+      <p class="mt-1 text-sm text-slate-500">Create multiple customer-facing advertisements, each with its own optional image and link.</p>
+      <div class="mt-5 grid gap-6 lg:grid-cols-2">
+        <div class="space-y-3">
+          <h4 id="ad-form-title" class="font-semibold text-forest-900">Add an advertisement</h4>
+          <input id="promotion-title-input" placeholder="Headline (e.g. New arrivals or Winter special)" class="w-full rounded-xl border px-3 py-2.5 text-sm" />
+          <textarea id="promotion-copy-input" rows="4" placeholder="Write your product news, special offer, or announcement..." class="w-full rounded-xl border px-3 py-2.5 text-sm"></textarea>
+          <div class="grid gap-2 sm:grid-cols-2"><input id="promotion-button-input" placeholder="Button label (optional)" class="rounded-xl border px-3 py-2.5 text-sm" /><input id="promotion-url-input" type="url" placeholder="Link URL (optional)" class="rounded-xl border px-3 py-2.5 text-sm" /></div>
+          <label class="block text-xs font-semibold text-slate-600">Advertisement picture<input id="promotion-file" type="file" accept="image/*" onchange="uploadManagedImage(event,'promotion')" class="mt-1 block w-full text-sm" /></label>
+          <img id="promotion-preview" hidden alt="Advertisement preview" class="h-28 rounded-lg border object-cover" />
+          <div class="flex gap-2"><button id="ad-save-button" type="button" onclick="saveAdvertisement()" class="rounded-xl bg-forest-900 px-4 py-2.5 text-sm font-bold text-white">Add Advertisement</button><button type="button" onclick="clearAdvertisementForm()" class="rounded-xl border px-4 py-2.5 text-sm font-semibold">Clear</button></div>
+          <div id="advertisement-list" class="space-y-2"></div>
+        </div>
+        <div class="space-y-4">
+          <h4 class="font-semibold text-forest-900">Supplier logos (up to 2)</h4>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="space-y-2 rounded-xl border p-3"><label class="text-xs font-semibold">Supplier 1 name<input id="supplier-name-1" class="mt-1 w-full rounded-lg border px-3 py-2 text-sm" placeholder="Supplier name" /></label><input id="supplier-file-1" type="file" accept="image/*" onchange="uploadManagedImage(event,'supplier1')" class="w-full text-xs" /><img id="supplier-preview-1" hidden alt="Supplier 1 logo preview" class="h-20 max-w-full object-contain" /></div>
+            <div class="space-y-2 rounded-xl border p-3"><label class="text-xs font-semibold">Supplier 2 name<input id="supplier-name-2" class="mt-1 w-full rounded-lg border px-3 py-2 text-sm" placeholder="Supplier name" /></label><input id="supplier-file-2" type="file" accept="image/*" onchange="uploadManagedImage(event,'supplier2')" class="w-full text-xs" /><img id="supplier-preview-2" hidden alt="Supplier 2 logo preview" class="h-20 max-w-full object-contain" /></div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-5 grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
+        <div class="grid gap-3 sm:grid-cols-2 sm:items-end">
+          <label class="block text-xs font-semibold text-slate-600">Company name<input id="business-name-input" class="mt-1 w-full rounded-xl border px-3 py-2.5 text-sm" /></label>
+          <label class="block text-xs font-semibold text-slate-600">Tagline / subtitle<input id="business-tagline-input" class="mt-1 w-full rounded-xl border px-3 py-2.5 text-sm" /></label>
+          <label class="block text-xs font-semibold text-slate-600">WhatsApp / phone<input id="business-phone-input" type="tel" class="mt-1 w-full rounded-xl border px-3 py-2.5 text-sm" /></label>
+          <label class="block text-xs font-semibold text-slate-600">Business email<input id="business-email-input" type="email" value="ibanesizathusokuphila@gmail.com" class="mt-1 w-full rounded-xl border px-3 py-2.5 text-sm" /></label>
+          <label class="block text-xs font-semibold text-slate-600 sm:col-span-2">Announcement banner<input id="business-announcement-input" class="mt-1 w-full rounded-xl border px-3 py-2.5 text-sm" /></label>
+          <label class="block text-xs font-semibold text-slate-600">Company logo<input id="company-logo-file" type="file" accept="image/*" onchange="uploadManagedImage(event,'companyLogo')" class="mt-1 block w-full text-sm" /><img id="company-logo-preview" hidden alt="Company logo preview" class="mt-2 h-16 w-16 rounded-lg border bg-white object-contain" /></label>
+        </div>
+        <button onclick="saveStorefrontContent()" class="rounded-xl bg-forest-900 px-5 py-3 text-sm font-bold text-white hover:bg-forest-800">Save Storefront Content</button>
+      </div>
+    </section>
+    <section class="mt-8"><h3 class="mb-3 font-display text-xl font-bold text-forest-900">Customer Orders</h3><div id="orders-list" class="space-y-3"></div></section>
+    </div>
+  </main>
+
+  <div id="cart-overlay" hidden class="fixed inset-0 z-40 flex justify-end bg-slate-950/60" onclick="if(event.target===this)toggleCart(false)">
+    <aside class="flex h-full w-full max-w-md flex-col bg-white shadow-2xl">
+      <div class="flex items-center justify-between bg-forest-950 p-5 text-white"><div><h2 class="font-display text-lg font-bold">Your Retail Basket</h2><p class="text-xs text-gold-400">Direct order from Ibanesizathusokuphila</p></div><button onclick="toggleCart(false)" class="rounded-lg bg-white/10 px-3 py-2" aria-label="Close basket">✕</button></div>
+      <div id="cart-items" class="flex-1 space-y-3 overflow-auto p-5"></div>
+      <form id="checkout-form" onsubmit="placeOrder(event)" class="border-t bg-slate-50 p-5">
+        <div class="mb-4 flex justify-between font-bold text-forest-900"><span>Order total</span><span id="cart-total">R 0.00</span></div>
+        <div class="space-y-2"><input id="customer-name" required placeholder="Your full name *" class="w-full rounded-xl border bg-white px-3 py-2.5 text-sm" /><input id="customer-phone" type="tel" required placeholder="WhatsApp / phone number *" class="w-full rounded-xl border bg-white px-3 py-2.5 text-sm" /><input id="customer-address" required placeholder="Delivery address or collection area *" class="w-full rounded-xl border bg-white px-3 py-2.5 text-sm" /><select id="payment-method" class="w-full rounded-xl border bg-white px-3 py-2.5 text-sm"><option>EFT / Instant Bank Transfer</option><option>Cash on Delivery / Collection</option><option>Request Payment Details on WhatsApp</option></select><button class="w-full rounded-xl bg-forest-900 py-3 text-sm font-bold text-white hover:bg-forest-800">Place Retail Order</button></div>
+      </form>
+    </aside>
+  </div>
+  <div id="product-dialog" hidden class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 p-4" onclick="if(event.target===this)closeProductForm()">
+    <form onsubmit="saveProduct(event)" class="w-full max-w-lg space-y-4 rounded-2xl bg-white p-6 shadow-2xl"><div class="flex items-center justify-between"><h2 class="font-display text-xl font-bold text-forest-900">Add Product</h2><button type="button" onclick="closeProductForm()" class="text-xl text-slate-500" aria-label="Close">✕</button></div><input id="edit-id" type="hidden" /><div class="flex items-center gap-3 rounded-xl border bg-slate-50 p-3"><img id="product-image-preview" hidden alt="Product photo preview" class="h-20 w-20 rounded-lg border bg-white object-cover" /><label class="block min-w-0 flex-1 text-xs font-semibold">Product photo<input id="product-image-file" type="file" accept="image/*" onchange="uploadProductImage(event)" class="mt-1 block w-full text-xs" /></label></div><label class="block text-xs font-semibold">Product name *<input id="product-name" required class="mt-1 w-full rounded-xl border px-3 py-2.5 text-sm" /></label><label class="block text-xs font-semibold">Category<select id="product-category" class="mt-1 w-full rounded-xl border bg-white px-3 py-2.5 text-sm"><option>Ubuntu Luxurious Goods</option><option>Imvelo Pharmaceutical</option></select></label><div class="grid grid-cols-2 gap-3"><label class="block text-xs font-semibold">Price (ZAR) *<input id="product-price" type="number" min="0" step="0.01" required class="mt-1 w-full rounded-xl border px-3 py-2.5 text-sm" /></label><label class="block text-xs font-semibold">Quantity *<input id="product-quantity" type="number" min="0" required class="mt-1 w-full rounded-xl border px-3 py-2.5 text-sm" /></label></div><label class="block text-xs font-semibold">Low-stock alert threshold<input id="product-threshold" type="number" min="0" value="5" class="mt-1 w-full rounded-xl border px-3 py-2.5 text-sm" /></label><label class="block text-xs font-semibold">Description<textarea id="product-description" rows="3" class="mt-1 w-full rounded-xl border px-3 py-2.5 text-sm"></textarea></label><div class="flex justify-end gap-2"><button type="button" onclick="closeProductForm()" class="rounded-xl border px-4 py-2 text-sm font-semibold">Cancel</button><button class="rounded-xl bg-forest-900 px-4 py-2 text-sm font-semibold text-white">Save Product</button></div></form>
+  </div>
+  <div id="toast" class="fixed bottom-5 left-1/2 z-[60] -translate-x-1/2 rounded-xl bg-forest-900 px-4 py-3 text-sm font-semibold text-white shadow-xl" hidden role="status"></div>
+  <button id="install-app" hidden class="fixed bottom-20 right-4 z-30 rounded-full bg-forest-900 px-4 py-3 text-sm font-bold text-white shadow-xl hover:bg-forest-800">Install app</button>
+  <a href="https://wa.me/27785335134?text=Hello%20Ibanesizathusokuphila%2C%20I%20would%20like%20to%20enquire%20about%20your%20products." target="_blank" rel="noopener" class="fixed bottom-5 right-4 z-30 rounded-full bg-[#25D366] px-4 py-3 text-sm font-bold text-white shadow-xl hover:bg-[#20bd5a]">Chat on WhatsApp</a>
+
+  <script>
+    const STORAGE_KEY = 'ibanesizathusokuphila_store_v1';
+    const starterProducts = [
+      { id: 'p1', name: 'Ubuntu Royal Shea & Marula Body Butter', category: 'Ubuntu Luxurious Goods', price: 280, quantity: 14, threshold: 5, description: 'Rich South African marula and shea body cream for deep, lasting hydration.' },
+      { id: 'p2', name: 'Ubuntu Signature Oud & Amber Elixir (50ml)', category: 'Ubuntu Luxurious Goods', price: 550, quantity: 4, threshold: 5, description: 'A long-lasting fragrance with warm African amber, oud wood and bergamot.' },
+      { id: 'p3', name: 'Ubuntu Heritage Silk & Gold Gift Set', category: 'Ubuntu Luxurious Goods', price: 690, quantity: 8, threshold: 4, description: 'A curated luxury gift set featuring botanical bath oils and a scented candle.' },
+      { id: 'p4', name: 'Imvelo Herbal Immune Booster Tonic (500ml)', category: 'Imvelo Pharmaceutical', price: 195, quantity: 22, threshold: 6, description: 'A wellness tonic formulated to support daily immune resilience and energy.' },
+      { id: 'p5', name: 'Imvelo Soothing Joint & Muscle Balm (100g)', category: 'Imvelo Pharmaceutical', price: 165, quantity: 3, threshold: 5, description: 'A fast-absorbing botanical balm for stiff joints and post-activity recovery.' },
+      { id: 'p6', name: 'Imvelo Daily Vitality Multi-Complex (60 Caps)', category: 'Imvelo Pharmaceutical', price: 240, quantity: 12, threshold: 5, description: 'A daily nutritional supplement for holistic wellness and vitality.' }
+    ];
+    function loadState() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        if (saved && Array.isArray(saved.products) && Array.isArray(saved.orders)) return saved;
+      } catch (error) { console.warn('Could not load saved store data.', error); }
+      return { products: starterProducts.map(p => ({ ...p })), orders: [] };
+    }
+    let state = loadState();
+    state.activity = Array.isArray(state.activity) ? state.activity : [];
+    state.business = { name: 'Ibanesizathusokuphila', tagline: 'Ubuntu Luxurious Goods & Imvelo Pharmaceutical', phone: '0785335134', announcement: 'Direct Retail Distributor: Ubuntu Luxurious Goods & Imvelo Pharmaceutical (Trillion Cart Investments) • WhatsApp Orders: 0785335134', email: 'ibanesizathusokuphila@gmail.com', logo: '', ...(state.business || {}) };
+    state.promotion = { title: '', copy: '', button: '', url: '', image: '', ...(state.promotion || {}) };
+    state.advertisements = Array.isArray(state.advertisements) ? state.advertisements : (state.promotion.title || state.promotion.copy || state.promotion.image ? [state.promotion] : []);
+    state.suppliers = Array.isArray(state.suppliers) ? state.suppliers.slice(0, 2) : [];
+    while (state.suppliers.length < 2) state.suppliers.push({ name: '', image: '' });
+    let uploadedImages = { product: '', promotion: '', supplier1: state.suppliers[0].image || '', supplier2: state.suppliers[1].image || '', companyLogo: state.business.logo || '' };
+    let editingAdIndex = -1;
+    let adminUnlocked = false;
+    let cart = {};
+    let category = 'All';
+    let toastTimer;
+    const money = value => 'R ' + Number(value || 0).toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+    function saveState() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (error) { toast('Could not save data. Browser storage may be full.'); } renderAll(); }
+    function toast(message) { const el = document.getElementById('toast'); el.textContent = message; el.hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(() => el.hidden = true, 3000); }
+    function logActivity(action, detail) {
+      state.activity.unshift({ action, detail, timestamp: Date.now() });
+      state.activity = state.activity.slice(0, 30);
+    }
+    function clearActivityLog() {
+      if (!state.activity.length) return;
+      state.activity = [];
+      saveState();
+      toast('Activity log cleared.');
+    }
+    const ADMIN_AUTH_KEY = 'ibanesizathusokuphila_admin_auth_v1';
+    function adminAuthRecord() { try { return JSON.parse(localStorage.getItem(ADMIN_AUTH_KEY) || 'null'); } catch (error) { return null; } }
+    function refreshAdminLock() {
+      const firstSetup = !adminAuthRecord();
+      document.getElementById('admin-lock-title').textContent = firstSetup ? 'Set Up Owner Admin Passcode' : 'Owner Admin Access';
+      document.getElementById('admin-lock-copy').textContent = firstSetup ? 'Create a passcode for this browser. You’ll need it each time you open the admin.' : 'Enter your passcode to access inventory, customer orders, and storefront settings.';
+      document.getElementById('admin-confirm-wrap').classList.toggle('hidden', !firstSetup);
+      document.getElementById('admin-unlock-button').textContent = firstSetup ? 'Create Passcode & Unlock' : 'Unlock Admin';
+      document.getElementById('admin-passcode').autocomplete = firstSetup ? 'new-password' : 'current-password';
+    }
+    async function hashAdminPasscode(passcode, salt) {
+      const bytes = new TextEncoder().encode(`${salt}:${passcode}`);
+      const digest = await crypto.subtle.digest('SHA-256', bytes);
+      return Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
+    }
+    async function unlockAdmin(event) {
+      event.preventDefault();
+      const passcode = document.getElementById('admin-passcode').value;
+      const error = document.getElementById('admin-auth-error');
+      error.textContent = '';
+      try {
+        const record = adminAuthRecord();
+        if (!record) {
+          if (passcode !== document.getElementById('admin-passcode-confirm').value) { error.textContent = 'The passcodes do not match.'; return; }
+          const salt = Array.from(crypto.getRandomValues(new Uint8Array(16)), byte => byte.toString(16).padStart(2, '0')).join('');
+          localStorage.setItem(ADMIN_AUTH_KEY, JSON.stringify({ salt, hash: await hashAdminPasscode(passcode, salt) }));
+        } else if (await hashAdminPasscode(passcode, record.salt) !== record.hash) {
+          error.textContent = 'That passcode is incorrect.';
+          return;
+        }
+        adminUnlocked = true;
+        document.getElementById('admin-lock').hidden = true;
+        document.getElementById('admin-content').hidden = false;
+        document.getElementById('admin-passcode').value = '';
+        document.getElementById('admin-passcode-confirm').value = '';
+      } catch (authError) { error.textContent = 'Passcode security is unavailable in this browser context. Open the site over HTTPS and try again.'; }
+    }
+    function lockAdmin() {
+      adminUnlocked = false;
+      document.getElementById('admin-lock').hidden = false;
+      document.getElementById('admin-content').hidden = true;
+      document.getElementById('admin-passcode').value = '';
+      refreshAdminLock();
+    }
+    function showView(which) {
+      document.getElementById('store-view').hidden = which !== 'store';
+      document.getElementById('admin-view').hidden = which !== 'admin';
+      document.getElementById('store-tab').className = which === 'store' ? 'rounded-lg bg-forest-900 px-3 py-2 text-xs font-semibold text-white' : 'rounded-lg px-3 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100';
+      document.getElementById('admin-tab').className = which === 'admin' ? 'rounded-lg bg-forest-900 px-3 py-2 text-xs font-semibold text-white' : 'rounded-lg px-3 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100';
+      if (which === 'admin' && !adminUnlocked) { document.getElementById('admin-lock').hidden = false; document.getElementById('admin-content').hidden = true; refreshAdminLock(); }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    function renderCategories() {
+      const categories = ['All', ...new Set(state.products.map(p => p.category))];
+      if (!categories.includes(category)) category = 'All';
+      document.getElementById('category-filters').innerHTML = categories.map(cat => `<button onclick="selectCategory('${escapeHTML(cat)}')" class="rounded-xl px-4 py-2 text-xs font-semibold ${cat === category ? 'bg-forest-900 text-white' : 'border border-slate-200 bg-white text-slate-700 hover:border-forest-800'}">${escapeHTML(cat)}</button>`).join('');
+    }
+    function selectCategory(value) { category = value; renderCategories(); renderProducts(); }
+    function renderProducts() {
+      const query = document.getElementById('search').value.trim().toLowerCase();
+      const availableOnly = document.getElementById('stock-filter').value === 'available';
+      const products = state.products.filter(p => (category === 'All' || p.category === category) && (!query || `${p.name} ${p.category} ${p.description}`.toLowerCase().includes(query)) && (!availableOnly || p.quantity > 0));
+      document.getElementById('empty-products').hidden = products.length > 0;
+      document.getElementById('product-grid').innerHTML = products.map(p => {
+        const stock = p.quantity < 1 ? '<span class="rounded-full bg-rose-100 px-2.5 py-1 text-[11px] font-bold text-rose-800">Out of stock</span>' : p.quantity <= p.threshold ? `<span class="rounded-full bg-amber-100 px-2.5 py-1 text-[11px] font-bold text-amber-800">Only ${p.quantity} left</span>` : `<span class="rounded-full bg-emerald-100 px-2.5 py-1 text-[11px] font-bold text-emerald-800">In stock (${p.quantity})</span>`;
+        const categoryColor = p.category.includes('Ubuntu') ? 'bg-gold-100 text-forest-900' : 'bg-forest-100 text-forest-900';
+        const photo = p.image ? `<img src="${escapeHTML(p.image)}" alt="${escapeHTML(p.name)}" class="h-44 w-full object-cover" />` : `<div class="flex h-44 items-center justify-center bg-gradient-to-br from-forest-900 to-forest-950 p-6 text-center text-gold-400"><div><span class="text-3xl">✦</span><p class="mt-2 font-display text-lg font-bold">${escapeHTML(p.category)}</p></div></div>`;
+        return `<article class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"><div>${photo}</div><div class="flex min-h-52 flex-col justify-between p-5"><div><div class="mb-2 flex flex-wrap items-center justify-between gap-2"><span class="rounded-lg px-2.5 py-1 text-[11px] font-bold ${categoryColor}">${escapeHTML(p.category)}</span>${stock}</div><h3 class="font-display text-lg font-bold leading-snug text-forest-900">${escapeHTML(p.name)}</h3><p class="mt-2 text-sm leading-relaxed text-slate-600">${escapeHTML(p.description || 'Quality product distributed directly by Ibanesizathusokuphila.')}</p></div><div class="mt-4 flex items-center justify-between gap-3 border-t border-slate-100 pt-3"><strong class="text-lg text-forest-900">${money(p.price)}</strong><button ${p.quantity <= 0 ? 'disabled' : ''} onclick="addToCart('${escapeHTML(p.id)}')" class="rounded-xl px-4 py-2.5 text-xs font-bold ${p.quantity <= 0 ? 'cursor-not-allowed bg-slate-100 text-slate-400' : 'bg-forest-900 text-white hover:bg-forest-800'}">${p.quantity <= 0 ? 'Sold out' : '+ Add to Basket'}</button></div></div></article>`;
+      }).join('');
+    }
+    function addToCart(id) { const product = state.products.find(p => p.id === id); if (!product || (cart[id] || 0) >= product.quantity) return toast('No more stock is available for this item.'); cart[id] = (cart[id] || 0) + 1; renderCart(); toast('Added to your basket.'); }
+    function changeQty(id, amount) { const product = state.products.find(p => p.id === id); const next = (cart[id] || 0) + amount; if (next <= 0) delete cart[id]; else if (!product || next > product.quantity) return toast('That quantity is not available.'); else cart[id] = next; renderCart(); }
+    function renderCart() {
+      const entries = Object.entries(cart).filter(([id, qty]) => qty > 0 && state.products.some(p => p.id === id));
+      const count = entries.reduce((sum, [, qty]) => sum + qty, 0);
+      let total = 0;
+      document.getElementById('cart-count').textContent = count;
+      document.getElementById('cart-items').innerHTML = entries.length ? entries.map(([id, qty]) => { const p = state.products.find(item => item.id === id); total += p.price * qty; return `<div class="flex items-center gap-3 rounded-xl border border-slate-200 p-3"><div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-forest-900 text-xl text-gold-400">✦</div><div class="min-w-0 flex-1"><h3 class="truncate text-sm font-bold text-forest-900">${escapeHTML(p.name)}</h3><p class="text-xs text-slate-500">${money(p.price)} each</p><div class="mt-1 flex items-center gap-2"><button onclick="changeQty('${escapeHTML(id)}',-1)" class="h-6 w-6 rounded bg-slate-100 font-bold">−</button><span class="text-xs font-bold">${qty}</span><button onclick="changeQty('${escapeHTML(id)}',1)" class="h-6 w-6 rounded bg-slate-100 font-bold">+</button></div></div><strong class="text-sm">${money(p.price * qty)}</strong></div>`; }).join('') : '<p class="py-10 text-center text-sm text-slate-500">Your shopping basket is empty.</p>';
+      document.getElementById('cart-total').textContent = money(total);
+      document.getElementById('checkout-form').hidden = entries.length === 0;
+    }
+    function toggleCart(open) { document.getElementById('cart-overlay').hidden = !open; if (open) renderCart(); }
+    function placeOrder(event) {
+      event.preventDefault();
+      const items = Object.entries(cart).map(([id, qty]) => ({ product: state.products.find(p => p.id === id), qty })).filter(item => item.product);
+      if (!items.length) return;
+      if (items.some(({ product, qty }) => product.quantity < qty)) return toast('Stock changed. Please check your basket and try again.');
+      const total = items.reduce((sum, { product, qty }) => sum + product.price * qty, 0);
+      items.forEach(({ product, qty }) => product.quantity -= qty);
+      const order = { id: 'ORD-' + Date.now().toString().slice(-6), name: document.getElementById('customer-name').value.trim(), phone: document.getElementById('customer-phone').value.trim(), address: document.getElementById('customer-address').value.trim(), payment: document.getElementById('payment-method').value, status: 'Pending', date: new Date().toLocaleString('en-ZA'), total, items: items.map(({ product, qty }) => ({ name: product.name, price: product.price, qty })) };
+      state.orders.unshift(order);
+      logActivity('Order', `${order.id} received from ${order.name}`);
+      cart = {}; event.target.reset(); saveState(); toggleCart(false); toast('Order placed! We will contact you to confirm shortly.');
+    }
+    function renderAdmin() {
+      const units = state.products.reduce((sum, p) => sum + Number(p.quantity), 0);
+      document.getElementById('kpi-products').textContent = state.products.length;
+      document.getElementById('kpi-units').textContent = units;
+      document.getElementById('kpi-low').textContent = state.products.filter(p => p.quantity <= p.threshold).length;
+      document.getElementById('kpi-orders').textContent = state.orders.length;
+      const activity = document.getElementById('admin-activity');
+      activity.innerHTML = state.activity.length ? state.activity.slice(0, 8).map(entry => `<div class="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-slate-100 px-3 py-2.5"><div class="min-w-0"><span class="mr-2 rounded-md bg-forest-100 px-2 py-1 text-[10px] font-bold uppercase text-forest-900">${escapeHTML(entry.action)}</span><span class="text-sm text-slate-700">${escapeHTML(entry.detail)}</span></div><time class="text-xs text-slate-400">${escapeHTML(new Date(entry.timestamp).toLocaleString('en-ZA'))}</time></div>`).join('') : '<p class="rounded-xl bg-slate-50 p-4 text-sm text-slate-500">No activity yet. Store changes will appear here.</p>';
+      const productQuery = (document.getElementById('admin-product-search')?.value || '').trim().toLowerCase();
+      const visibleProducts = state.products.filter(p => `${p.name} ${p.category} ${p.description || ''}`.toLowerCase().includes(productQuery));
+      document.getElementById('admin-products').innerHTML = visibleProducts.length ? visibleProducts.map(p => `<article class="rounded-2xl border ${p.quantity <= p.threshold ? 'border-amber-300' : 'border-slate-200'} bg-white p-4 shadow-sm">${p.image ? `<img src="${escapeHTML(p.image)}" alt="${escapeHTML(p.name)}" class="mb-3 h-36 w-full rounded-xl object-cover" />` : ''}<p class="text-xs font-semibold text-gold-600">${escapeHTML(p.category)}</p><h4 class="mt-1 font-bold text-forest-900">${escapeHTML(p.name)}</h4><p class="mt-1 text-sm">${money(p.price)} <span class="text-slate-500">• ${p.quantity} in stock</span></p><p class="mt-2 text-xs text-slate-500">Alert threshold: ${p.threshold}</p><div class="mt-4 flex gap-2"><button onclick="adjustStock('${escapeHTML(p.id)}',-1)" class="rounded-lg border px-3 py-1.5 font-bold">−</button><button onclick="adjustStock('${escapeHTML(p.id)}',1)" class="rounded-lg border px-3 py-1.5 font-bold">+</button><button onclick="editProduct('${escapeHTML(p.id)}')" class="ml-auto rounded-lg bg-slate-100 px-3 py-1.5 text-xs font-semibold">Edit</button><button onclick="removeProduct('${escapeHTML(p.id)}')" class="rounded-lg bg-rose-50 px-3 py-1.5 text-xs font-semibold text-rose-700">Remove</button></div></article>`).join('') : `<p class="text-sm text-slate-500">${state.products.length ? 'No inventory matches your search.' : 'No products yet. Add stock to get started.'}</p>`;
+      document.getElementById('orders-list').innerHTML = state.orders.length ? state.orders.map(o => `<article class="rounded-2xl border border-slate-200 bg-white p-4"><div class="flex flex-wrap justify-between gap-2"><div><p class="font-bold text-forest-900">${escapeHTML(o.name)} <span class="font-mono text-xs text-slate-500">${escapeHTML(o.id)}</span></p><p class="mt-1 text-xs text-slate-500">${escapeHTML(o.phone)} • ${escapeHTML(o.date)}</p><p class="mt-1 text-xs text-slate-500">${escapeHTML(o.address)} • ${escapeHTML(o.payment)}</p></div><label class="text-xs font-semibold">Status <select onchange="setOrderStatus('${escapeHTML(o.id)}',this.value)" class="ml-1 rounded-lg border bg-white px-2 py-1"><option ${o.status==='Pending'?'selected':''}>Pending</option><option ${o.status==='Confirmed'?'selected':''}>Confirmed</option><option ${o.status==='Delivered'?'selected':''}>Delivered</option><option ${o.status==='Cancelled'?'selected':''}>Cancelled</option></select></label></div><ul class="my-3 border-y py-2 text-sm">${o.items.map(item => `<li>${item.qty} × ${escapeHTML(item.name)} — ${money(item.price * item.qty)}</li>`).join('')}</ul><p class="text-right font-bold text-forest-900">Total: ${money(o.total)}</p></article>`).join('') : '<p class="text-sm text-slate-500">No customer orders yet.</p>';
+    }
+    function readCompressedImage(file, maxSide = 1000) {
+      return new Promise((resolve, reject) => {
+        if (!file || !file.type.startsWith('image/')) return reject(new Error('Please choose an image file.'));
+        if (file.size > 12 * 1024 * 1024) return reject(new Error('Choose an image smaller than 12 MB.'));
+        const reader = new FileReader();
+        reader.onerror = () => reject(new Error('Could not read that image.'));
+        reader.onload = () => {
+          const image = new Image();
+          image.onerror = () => reject(new Error('That image could not be opened.'));
+          image.onload = () => {
+            const scale = Math.min(1, maxSide / Math.max(image.width, image.height));
+            const canvas = document.createElement('canvas');
+            canvas.width = Math.max(1, Math.round(image.width * scale));
+            canvas.height = Math.max(1, Math.round(image.height * scale));
+            const context = canvas.getContext('2d');
+            context.fillStyle = '#ffffff';
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(image, 0, 0, canvas.width, canvas.height);
+            resolve(canvas.toDataURL('image/jpeg', 0.78));
+          };
+          image.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+    async function uploadProductImage(event) {
+      try {
+        uploadedImages.product = await readCompressedImage(event.target.files[0], 900);
+        const preview = document.getElementById('product-image-preview');
+        preview.src = uploadedImages.product;
+        preview.hidden = false;
+      } catch (error) { toast(error.message); }
+    }
+    async function uploadManagedImage(event, key) {
+      const previewIds = { promotion: 'promotion-preview', supplier1: 'supplier-preview-1', supplier2: 'supplier-preview-2', companyLogo: 'company-logo-preview' };
+      try {
+        uploadedImages[key] = await readCompressedImage(event.target.files[0], key === 'promotion' ? 1200 : 700);
+        const preview = document.getElementById(previewIds[key]);
+        preview.src = uploadedImages[key];
+        preview.hidden = false;
+      } catch (error) { toast(error.message); }
+    }
+    function clearAdvertisementForm() {
+      editingAdIndex = -1;
+      ['promotion-title-input', 'promotion-copy-input', 'promotion-button-input', 'promotion-url-input'].forEach(id => document.getElementById(id).value = '');
+      uploadedImages.promotion = '';
+      document.getElementById('promotion-file').value = '';
+      document.getElementById('promotion-preview').hidden = true;
+      document.getElementById('ad-form-title').textContent = 'Add an advertisement';
+      document.getElementById('ad-save-button').textContent = 'Add Advertisement';
+    }
+    function editAdvertisement(index) {
+      const ad = state.advertisements[index];
+      if (!ad) return;
+      editingAdIndex = index;
+      document.getElementById('promotion-title-input').value = ad.title || '';
+      document.getElementById('promotion-copy-input').value = ad.copy || '';
+      document.getElementById('promotion-button-input').value = ad.button || '';
+      document.getElementById('promotion-url-input').value = ad.url || '';
+      uploadedImages.promotion = ad.image || '';
+      const preview = document.getElementById('promotion-preview');
+      preview.src = uploadedImages.promotion;
+      preview.hidden = !uploadedImages.promotion;
+      document.getElementById('promotion-file').value = '';
+      document.getElementById('ad-form-title').textContent = 'Edit advertisement';
+      document.getElementById('ad-save-button').textContent = 'Save Changes';
+    }
+    function saveAdvertisement() {
+      const ad = {
+        title: document.getElementById('promotion-title-input').value.trim(),
+        copy: document.getElementById('promotion-copy-input').value.trim(),
+        button: document.getElementById('promotion-button-input').value.trim(),
+        url: document.getElementById('promotion-url-input').value.trim(),
+        image: uploadedImages.promotion
+      };
+      if (!ad.title && !ad.copy && !ad.image) return toast('Add a headline, message, or picture first.');
+      if (editingAdIndex < 0) state.advertisements.push(ad);
+      else state.advertisements[editingAdIndex] = ad;
+      logActivity('Advertisement', `${editingAdIndex < 0 ? 'Added' : 'Updated'} ${ad.title || 'an advertisement'}`);
+      clearAdvertisementForm();
+      saveState();
+      toast('Advertisement saved.');
+    }
+    function removeAdvertisement(index) {
+      if (!confirm('Remove this advertisement?')) return;
+      const removedAd = state.advertisements[index];
+      state.advertisements.splice(index, 1);
+      logActivity('Advertisement', `Removed ${removedAd?.title || 'an advertisement'}`);
+      clearAdvertisementForm();
+      saveState();
+      toast('Advertisement removed.');
+    }
+    function renderAdvertisementList() {
+      const list = document.getElementById('advertisement-list');
+      if (!list) return;
+      list.innerHTML = state.advertisements.length ? state.advertisements.map((ad, index) => `<div class="flex items-center gap-2 rounded-xl border p-3"><div class="min-w-0 flex-1"><strong class="block truncate text-sm text-forest-900">${escapeHTML(ad.title || 'Untitled advertisement')}</strong><span class="text-xs text-slate-500">${ad.image ? 'Picture included' : 'Text only'}</span></div><button type="button" onclick="editAdvertisement(${index})" class="rounded-lg bg-slate-100 px-3 py-1.5 text-xs font-semibold">Edit</button><button type="button" onclick="removeAdvertisement(${index})" class="rounded-lg bg-rose-50 px-3 py-1.5 text-xs font-semibold text-rose-700">Remove</button></div>`).join('') : '<p class="text-xs text-slate-500">No advertisements yet.</p>';
+    }
+    function renderStorefrontExtras() {
+      const business = state.business;
+      document.getElementById('company-name').textContent = business.name;
+      document.getElementById('footer-business-name').textContent = business.name;
+      document.getElementById('company-tagline').textContent = business.tagline;
+      document.getElementById('announcement-text').textContent = business.announcement;
+      const phone = business.phone || '0785335134';
+      const phoneDigits = phone.replace(/\D/g, '');
+      const whatsappNumber = phoneDigits.startsWith('0') && phoneDigits.length === 10 ? '27' + phoneDigits.slice(1) : phoneDigits;
+      const whatsappUrl = `https://wa.me/${whatsappNumber || '27785335134'}`;
+      const heroWhatsapp = document.getElementById('hero-whatsapp');
+      heroWhatsapp.href = whatsappUrl;
+      document.getElementById('hero-phone').textContent = phone;
+      const footerPhone = document.getElementById('footer-phone-link');
+      footerPhone.href = whatsappUrl;
+      footerPhone.textContent = phone;
+      const advertisements = state.advertisements || [];
+      const promoSection = document.getElementById('promotion-section');
+      promoSection.hidden = advertisements.length === 0;
+      promoSection.innerHTML = advertisements.map(ad => {
+        let safeUrl = '';
+        try { const parsed = new URL(ad.url); if (['http:', 'https:'].includes(parsed.protocol)) safeUrl = parsed.href; } catch (error) {}
+        return `<article class="overflow-hidden rounded-2xl border border-gold-500/30 bg-white shadow-sm md:flex">${ad.image ? `<img src="${escapeHTML(ad.image)}" alt="${escapeHTML(ad.title || 'Special offer')}" class="max-h-80 w-full object-cover md:w-2/5" />` : ''}<div class="flex flex-1 flex-col justify-center p-6 sm:p-8"><span class="text-xs font-bold uppercase tracking-widest text-gold-600">New products &amp; specials</span>${ad.title ? `<h2 class="mt-2 font-display text-2xl font-bold text-forest-900">${escapeHTML(ad.title)}</h2>` : ''}${ad.copy ? `<p class="mt-2 whitespace-pre-wrap text-sm leading-relaxed text-slate-600">${escapeHTML(ad.copy)}</p>` : ''}${safeUrl && ad.button ? `<a href="${escapeHTML(safeUrl)}" target="_blank" rel="noopener" class="mt-5 w-fit rounded-xl bg-forest-900 px-4 py-2.5 text-sm font-bold text-white hover:bg-forest-800">${escapeHTML(ad.button)}</a>` : ''}</div></article>`;
+      }).join('');
+      const suppliers = state.suppliers.filter(supplier => supplier && supplier.image);
+      document.getElementById('supplier-section').hidden = suppliers.length === 0;
+      document.getElementById('supplier-logos').innerHTML = suppliers.map(supplier => `<div class="flex min-w-32 flex-col items-center gap-2"><img src="${escapeHTML(supplier.image)}" alt="${escapeHTML(supplier.name || 'Supplier logo')}" class="h-16 max-w-48 object-contain" />${supplier.name ? `<span class="text-xs font-semibold text-slate-600">${escapeHTML(supplier.name)}</span>` : ''}</div>`).join('');
+      const logo = document.getElementById('company-logo');
+      const logoFallback = document.getElementById('company-logo-fallback');
+      logo.hidden = !state.business.logo;
+      logoFallback.hidden = !!state.business.logo;
+      if (state.business.logo) logo.src = state.business.logo;
+      const email = state.business.email || 'ibanesizathusokuphila@gmail.com';
+      const emailLink = document.getElementById('business-email-link');
+      emailLink.href = `mailto:${email}`;
+      emailLink.textContent = email;
+    }
+    function saveStorefrontContent() {
+      state.business.name = document.getElementById('business-name-input').value.trim() || 'Ibanesizathusokuphila';
+      state.business.tagline = document.getElementById('business-tagline-input').value.trim();
+      state.business.phone = document.getElementById('business-phone-input').value.trim() || '0785335134';
+      state.business.announcement = document.getElementById('business-announcement-input').value.trim();
+      state.suppliers = [1, 2].map((number, index) => ({
+        name: document.getElementById(`supplier-name-${number}`).value.trim(),
+        image: uploadedImages[`supplier${number}`]
+      }));
+      state.business.email = document.getElementById('business-email-input').value.trim() || 'ibanesizathusokuphila@gmail.com';
+      state.business.logo = uploadedImages.companyLogo;
+      logActivity('Storefront', 'Updated business details and supplier information');
+      saveState();
+      toast('Storefront details, supplier logos, and email saved.');
+    }
+    function openProductForm(product = null) { document.getElementById('edit-id').value = product?.id || ''; document.getElementById('product-name').value = product?.name || ''; document.getElementById('product-category').value = product?.category || 'Ubuntu Luxurious Goods'; document.getElementById('product-price').value = product?.price ?? ''; document.getElementById('product-quantity').value = product?.quantity ?? 10; document.getElementById('product-threshold').value = product?.threshold ?? 5; document.getElementById('product-description').value = product?.description || ''; uploadedImages.product = product?.image || ''; const preview = document.getElementById('product-image-preview'); preview.src = uploadedImages.product; preview.hidden = !uploadedImages.product; document.getElementById('product-image-file').value = ''; document.querySelector('#product-dialog h2').textContent = product ? 'Edit Product' : 'Add Product'; document.getElementById('product-dialog').hidden = false; }
+    function closeProductForm() { document.getElementById('product-dialog').hidden = true; }
+    function saveProduct(event) { event.preventDefault(); const id = document.getElementById('edit-id').value; const product = { id: id || 'p-' + Date.now(), name: document.getElementById('product-name').value.trim(), category: document.getElementById('product-category').value, price: Number(document.getElementById('product-price').value), quantity: Number(document.getElementById('product-quantity').value), threshold: Number(document.getElementById('product-threshold').value), description: document.getElementById('product-description').value.trim(), image: uploadedImages.product }; if (id) state.products = state.products.map(p => p.id === id ? product : p); else state.products.unshift(product); logActivity('Inventory', `${id ? 'Updated' : 'Added'} ${product.name}`); closeProductForm(); saveState(); toast(id ? 'Product updated.' : 'Product added to stock.'); }
+    function editProduct(id) { const product = state.products.find(p => p.id === id); if (product) openProductForm(product); }
+    function adjustStock(id, delta) { const product = state.products.find(p => p.id === id); if (!product) return; product.quantity = Math.max(0, product.quantity + delta); logActivity('Inventory', `${product.name}: stock is now ${product.quantity}`); saveState(); }
+    function removeProduct(id) { const product = state.products.find(p => p.id === id); if (!product || !confirm(`Remove ${product.name} from the catalog?`)) return; state.products = state.products.filter(p => p.id !== id); delete cart[id]; logActivity('Inventory', `Removed ${product.name}`); saveState(); toast('Product removed.'); }
+    function setOrderStatus(id, status) { const order = state.orders.find(o => o.id === id); if (order) { order.status = status; logActivity('Order', `${order.id} marked ${status}`); saveState(); } }
+    function renderAdminContentFields() {
+      document.getElementById('business-name-input').value = state.business.name || 'Ibanesizathusokuphila';
+      document.getElementById('business-tagline-input').value = state.business.tagline || '';
+      document.getElementById('business-phone-input').value = state.business.phone || '0785335134';
+      document.getElementById('business-announcement-input').value = state.business.announcement || '';
+      document.getElementById('business-email-input').value = state.business.email || 'ibanesizathusokuphila@gmail.com';
+      document.getElementById('company-logo-file').value = '';
+      document.getElementById('company-logo-preview').hidden = !state.business.logo;
+      if (state.business.logo) document.getElementById('company-logo-preview').src = state.business.logo;
+      renderAdvertisementList();
+      [1, 2].forEach((number, index) => {
+        const supplier = state.suppliers[index] || {};
+        document.getElementById(`supplier-name-${number}`).value = supplier.name || '';
+        const preview = document.getElementById(`supplier-preview-${number}`);
+        preview.hidden = !supplier.image;
+        if (supplier.image) preview.src = supplier.image;
+      });
+    }
+    function renderAll() { renderCategories(); renderProducts(); renderCart(); renderAdmin(); renderAdminContentFields(); renderStorefrontExtras(); }
+    refreshAdminLock();
+    let installPromptEvent;
+    window.addEventListener('beforeinstallprompt', event => {
+      event.preventDefault();
+      installPromptEvent = event;
+      document.getElementById('install-app').hidden = false;
+    });
+    document.getElementById('install-app').addEventListener('click', async () => {
+      if (!installPromptEvent) return;
+      installPromptEvent.prompt();
+      await installPromptEvent.userChoice;
+      installPromptEvent = null;
+      document.getElementById('install-app').hidden = true;
+    });
+    window.addEventListener('appinstalled', () => { document.getElementById('install-app').hidden = true; });
+    if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(error => console.warn('Offline app support could not be enabled.', error)));
+    }
+    renderAll();
+  </script>
+</body>
+</html>
